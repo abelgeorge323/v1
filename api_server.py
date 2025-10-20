@@ -9,14 +9,13 @@ import hashlib
 import random
 from flask import Flask, jsonify
 from flask_cors import CORS
-import streamlit as st
+import os
 
 # Create Flask app
 app = Flask(__name__)
 CORS(app)  # Enable CORS for HTML frontend
 
 # ---- DATA LOADING FUNCTIONS (from original app.py) ----
-@st.cache_data(ttl=60)  # Cache for 60 seconds
 def load_data():
     """Load data from Google Sheets"""
     main_data_url = (
@@ -39,7 +38,6 @@ def load_data():
     
     return df, data_source
 
-@st.cache_data(ttl=60)  # Cache for 60 seconds
 def load_jobs_data():
     """Load jobs data from Google Sheets"""
     # ✅ Correct Open Jobs Google Sheets URL from original app.py
@@ -373,4 +371,5 @@ if __name__ == "__main__":
     print("\nAPI Server running on: http://localhost:5000")
     print("Open your HTML file to use the dashboard!")
     
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
