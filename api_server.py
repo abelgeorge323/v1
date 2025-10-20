@@ -7,7 +7,7 @@ Serves Google Sheets data as JSON API for HTML frontend
 import pandas as pd
 import hashlib
 import random
-from flask import Flask, jsonify
+from flask import Flask, jsonify, send_file
 from flask_cors import CORS
 import os
 
@@ -72,6 +72,13 @@ def generate_mock_scores(candidate_name):
     }
     random.seed()  # Reset random seed
     return scores
+
+# ---- MAIN ROUTE ----
+
+@app.route('/')
+def serve_dashboard():
+    """Serve the main dashboard HTML page"""
+    return send_file('index.html')
 
 # ---- API ENDPOINTS ----
 
