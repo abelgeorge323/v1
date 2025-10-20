@@ -56,6 +56,26 @@ def load_jobs_data():
         print(f"⚠️ Jobs data error: {e}")
         return pd.DataFrame()
 
+def parse_salary(salary_value):
+    """Parse salary from various formats to numeric value"""
+    if pd.isna(salary_value):
+        return 0
+    
+    # If already numeric, return it
+    if isinstance(salary_value, (int, float)):
+        return float(salary_value)
+    
+    # If string, clean it up
+    if isinstance(salary_value, str):
+        # Remove $, commas, and whitespace
+        cleaned = salary_value.replace('$', '').replace(',', '').strip()
+        try:
+            return float(cleaned)
+        except ValueError:
+            return 0
+    
+    return 0
+
 def generate_mock_scores(candidate_name):
     """Generate consistent mock scores based on candidate name"""
     # Use hash of name to ensure consistent scores
@@ -155,9 +175,7 @@ def get_candidates():
             if pd.isna(week_value):
                 week_value = '—'
             
-            salary_value = row.get('Salary', 0)
-            if pd.isna(salary_value):
-                salary_value = 0
+            salary_value = parse_salary(row.get('Salary', 0))
             
             candidates.append({
                 'name': row['MIT Name'],
@@ -196,9 +214,7 @@ def get_candidate_profile(name):
         if pd.isna(week_value):
             week_value = '—'
         
-        salary_value = row.get('Salary', 0)
-        if pd.isna(salary_value):
-            salary_value = 0
+        salary_value = parse_salary(row.get('Salary', 0))
         
         return jsonify({
             'name': row['MIT Name'],
@@ -238,9 +254,7 @@ def get_all_candidates():
             if pd.isna(week_value):
                 week_value = '—'
             
-            salary_value = row.get('Salary', 0)
-            if pd.isna(salary_value):
-                salary_value = 0
+            salary_value = parse_salary(row.get('Salary', 0))
             
             candidates.append({
                 'name': row['MIT Name'],
@@ -278,9 +292,7 @@ def get_in_training_candidates():
             if pd.isna(week_value):
                 week_value = '—'
             
-            salary_value = row.get('Salary', 0)
-            if pd.isna(salary_value):
-                salary_value = 0
+            salary_value = parse_salary(row.get('Salary', 0))
             
             candidates.append({
                 'name': row['MIT Name'],
@@ -315,9 +327,7 @@ def get_offer_pending_candidates():
             if pd.isna(week_value):
                 week_value = '—'
             
-            salary_value = row.get('Salary', 0)
-            if pd.isna(salary_value):
-                salary_value = 0
+            salary_value = parse_salary(row.get('Salary', 0))
             
             candidates.append({
                 'name': row['MIT Name'],
