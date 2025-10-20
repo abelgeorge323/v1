@@ -1,3 +1,5 @@
 streamlit
 pandas
 plotly
+flask
+flask-cors
