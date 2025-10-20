@@ -447,7 +447,7 @@
         // Load dashboard data from API
         async function loadDashboardData() {
             try {
-                const response = await fetch('http://localhost:5000/api/dashboard-data');
+                const response = await fetch('/api/dashboard-data');
                 const data = await response.json();
                 
                 if (data.error) {
@@ -498,7 +498,7 @@
         // Load all candidates data from API
         async function loadAllCandidates() {
             try {
-                const response = await fetch('http://localhost:5000/api/all-candidates');
+                const response = await fetch('/api/all-candidates');
                 const data = await response.json();
                 
                 if (data.error) {
@@ -517,7 +517,7 @@
         // Load in training candidates
         async function loadInTrainingCandidates() {
             try {
-                const response = await fetch('http://localhost:5000/api/in-training-candidates');
+                const response = await fetch('/api/in-training-candidates');
                 const data = await response.json();
                 
                 if (data.error) {
@@ -536,7 +536,7 @@
         // Load offer pending candidates
         async function loadOfferPendingCandidates() {
             try {
-                const response = await fetch('http://localhost:5000/api/offer-pending-candidates');
+                const response = await fetch('/api/offer-pending-candidates');
                 const data = await response.json();
                 
                 if (data.error) {
@@ -555,7 +555,7 @@
         // Load open positions
         async function loadOpenPositions() {
             try {
-                const response = await fetch('http://localhost:5000/api/open-positions');
+                const response = await fetch('/api/open-positions');
                 const data = await response.json();
                 
                 if (data.error) {
@@ -574,7 +574,7 @@
         // Load candidates data from API
         async function loadCandidates() {
             try {
-                const response = await fetch('http://localhost:5000/api/candidates');
+                const response = await fetch('/api/candidates');
                 const data = await response.json();
                 
                 if (data.error) {
@@ -731,7 +731,7 @@
         // Load candidate profile from API
         async function loadCandidateProfile(name) {
             try {
-                const response = await fetch(`http://localhost:5000/api/candidate/${encodeURIComponent(name)}`);
+                const response = await fetch(`/api/candidate/${encodeURIComponent(name)}`);
                 const candidate = await response.json();
                 
                 if (candidate.error) {
